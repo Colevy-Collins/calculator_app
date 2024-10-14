@@ -1,6 +1,6 @@
 import 'package:calculator/button.dart';
 import 'package:flutter/material.dart';
-import 'package:math_expressions/math_expressions.dart';
+import 'ans_command.dart';
 import 'command.dart';
 import 'clear_command.dart';
 import 'delete_command.dart';
@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
       'C': ClearCommand(),
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
+      'ANS': ANSCommand(),
     };
 
     // Add commands for each number and operator
