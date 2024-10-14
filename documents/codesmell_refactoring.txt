@@ -2,3 +2,5 @@ CodeSmell 1: Rigidity in the UI makes it hard to see all button on different siz
    Refactor 1: Introduce Layout Manager via the LayoutBuilder instead of container and the addition of AspectRatio wrapped around the buttons
 CodeSmell 2: Deep Nesting of if statements in the pressButton method make the code hard to read and maintain.
    Refactor 2: utilize the Strategy Pattern to create a new class for each button and implement the pressButton method in each class
+CodeSmell 3: Ridigity with the button array makes it hart to work with and add/remove buttons
+    Refactor 3: Extract a class for the button array to allow for the easy maintenance of buttons and their location on the screen
