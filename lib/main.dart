@@ -1,7 +1,11 @@
 import 'package:calculator/button.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator/main.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'command.dart';
+import 'clear_command.dart';
+import 'delete_command.dart';
+import 'calculate_command.dart';
+import 'basic_command.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,56 +34,41 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String userQuestion = '';
   String userAnswer = '';
+  late Map<String, Command> commandMap;
 
-  final List buttons = [
-    'C', // buttons[0]
-    'DEL', // buttons[1]
-    '%', // buttons[2]
-    '/', // buttons[3]
-    '9', // buttons[4]
-    '8', // buttons[5]
-    '7', // buttons[6]
-    '*', // buttons[7]
-    '6', // buttons[8]
-    '5', // buttons[9]
-    '4', // buttons[10]
-    '-', // buttons[11]
-    '3', // buttons[12]
-    '2', // buttons[13]
-    '1', // buttons[14]
-    '+', // buttons[15]
-    '0', // buttons[16]
-    '.', // buttons[17]
-    'ANS', // buttons[18]
-    '=', // buttons[19]
+  final List<String> buttons = [
+    'C', 'DEL', '%', '/',
+    '9', '8', '7', '*',
+    '6', '5', '4', '-',
+    '3', '2', '1', '+',
+    '0', '.', 'ANS', '=',
   ];
 
-  void calculateExpression() {
-    Parser p = Parser();
-    Expression expression = p.parse(userQuestion);
-    ContextModel cm = ContextModel();
-    double eval = expression.evaluate(EvaluationType.REAL, cm);
+  @override
+  void initState() {
+    super.initState();
 
-    setState(() {
-      userAnswer = eval.toString();
-    });
+    // Initialize the command map
+    commandMap = {
+      'C': ClearCommand(),
+      'DEL': DeleteCommand(),
+      '=': CalculateCommand(),
+    };
+
+    // Add commands for each number and operator
+    for (String button in buttons) {
+      if (!commandMap.containsKey(button)) {
+        commandMap[button] = BasicCommand(button);
+      }
+    }
   }
 
   void pressedButton(String button) {
-    if (button == 'C') {
+    if (commandMap.containsKey(button)) {
+      List<String> result = commandMap[button]?.execute(userQuestion, userAnswer) ?? [userQuestion, userAnswer];
       setState(() {
-        userQuestion = '';
-        userAnswer = '';
-      });
-    } else if (button == 'DEL') {
-      setState(() {
-        userQuestion = userQuestion.substring(0, userQuestion.length - 1);
-      });
-    } else if (button == '=') {
-      calculateExpression();
-    } else {
-      setState(() {
-        userQuestion += button;
+        userQuestion = result[0];
+        userAnswer = result[1];
       });
     }
   }
@@ -126,26 +115,37 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        // buttons
+        // Buttons with AspectRatio for consistent sizing
         Expanded(
           flex: 2,
-          child: Container(
-              height: 200,
-              child: GridView.builder(
-                  itemCount: buttons.length,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
-                  itemBuilder: (context, index) {
-                    return MyButton(
-                      child: buttons[index],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              double buttonWidth = constraints.maxWidth / 4; // 4 columns
+              double buttonHeight = constraints.maxHeight / 5; // 5 rows
+
+              return GridView.builder(
+                itemCount: buttons.length,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: buttonWidth / buttonHeight,
+                ),
+                itemBuilder: (context, index) {
+                  return AspectRatio(
+                    aspectRatio: 1, // Ensures the buttons are square
+                    child: MyButton(
+                      child: buttons[index], //button label
                       buttonColor: Colors.deepPurple[100],
                       textColor: Colors.black,
                       function: () {
                         pressedButton(buttons[index]);
                       },
-                    );
-                  })),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ]),
     );
