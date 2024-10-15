@@ -1,4 +1,4 @@
-import 'command.dart';
+import '../base_project/command.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class CalculateCommand implements Command {

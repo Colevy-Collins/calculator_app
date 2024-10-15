@@ -1,12 +1,6 @@
-import 'package:calculator/button.dart';
 import 'package:flutter/material.dart';
-import 'ans_command.dart';
-import 'command.dart';
-import 'clear_command.dart';
-import 'delete_command.dart';
-import 'calculate_command.dart';
-import 'basic_command.dart';
-import 'button_pad.dart';
+import 'package:calculator/base_project/command_export.dart';
+import 'package:calculator/project_features/command_export.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,42 +29,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String userQuestion = '';
   String userAnswer = '';
-  late Map<String, Command> commandMap;
 
   final List<List<String?>> buttons = ButtonPad().getGrid();
 
-  @override
-  void initState() {
-    super.initState();
-
-    // Initialize the command map
-    commandMap = {
-      'C': ClearCommand(),
-      'DEL': DeleteCommand(),
-      '=': CalculateCommand(),
-      'ANS': ANSCommand(),
-      'Empty': BasicCommand(''),
-    };
-
-    // Add commands for each number and operator
-    for (var row in buttons) {
-      for (String? button in row) {
-        if (button != null && !commandMap.containsKey(button)) {
-          commandMap[button] = BasicCommand(button);
-        }
-      }
-    }
-  }
-
   void pressedButton(String button) {
-    if (commandMap.containsKey(button)) {
-      List<String> result = commandMap[button]?.execute(
-          userQuestion, userAnswer) ?? [userQuestion, userAnswer];
-      setState(() {
-        userQuestion = result[0];
-        userAnswer = result[1];
-      });
-    }
+    List<String> result = ButtonPad().pressedButton(button, userQuestion, userAnswer);
+    setState(() {
+      userQuestion = result[0];
+      userAnswer = result[1];
+    });
   }
 
   @override
@@ -122,10 +89,8 @@ class _HomePageState extends State<HomePage> {
             builder: (context, constraints) {
               int rows = buttons.length; // Number of rows in the grid
               int columns = buttons[0].length; // Number of columns in the grid
-              double buttonWidth = constraints.maxWidth /
-                  columns; // Adjust width based on columns
-              double buttonHeight = constraints.maxHeight /
-                  rows; // Adjust height based on rows
+              double buttonWidth = constraints.maxWidth / columns; // Adjust width based on columns
+              double buttonHeight = constraints.maxHeight / rows; // Adjust height based on rows
 
               return GridView.builder(
                 itemCount: rows * columns, // Total buttons count
