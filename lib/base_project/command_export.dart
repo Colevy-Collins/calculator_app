@@ -6,3 +6,5 @@ export 'delete_command.dart';
 export '../project_features/calculate_command.dart';
 export 'basic_command.dart';
 export '../project_features/button_pad.dart';
+export '../project_features/pi_command.dart';
+export '../project_features/toggle_sign_command.dart';

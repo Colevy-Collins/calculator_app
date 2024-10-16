@@ -1,4 +1,5 @@
 import 'package:calculator/base_project/command_export.dart';
+import 'dart:math';
 
 class ButtonPad {
   List<List<String?>> _grid = [];
@@ -15,10 +16,10 @@ class ButtonPad {
   // Initialize the grid with the provided buttons
   void _initializeGrid() {
     _grid = [['C', 'DEL', '%', '/'],
-             ['9', '8', '7', '*'],
-             ['6', '5', '4', '-'],
-             ['3', '2', '1', '+'],
-             ['0', '.', 'ANS', '='],
+      ['9', '8', '7', '*'],
+      ['6', '5', '4', '-'],
+      ['3', '2', '1', '+'],
+      ['0', '.', 'ANS', '=',],
     ];
 
     // Initialize the command map
@@ -27,6 +28,8 @@ class ButtonPad {
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
       'ANS': ANSCommand(),
+      '+/-': ToggleSignCommand(),
+      'π': PiCommand(),
     };
 
     // Add commands for each number and operator
@@ -36,15 +39,15 @@ class ButtonPad {
       }
     }
 
-      // Add commands for any extra buttons
-      for (var row in _grid) {
-        for (String? button in row) {
-          if (button != null && !commandMap.containsKey(button)) {
-            commandMap[button] = BasicCommand('');
-          }
+    // Add commands for any extra buttons
+    for (var row in _grid) {
+      for (String? button in row) {
+        if (button != null && !commandMap.containsKey(button)) {
+          commandMap[button] = BasicCommand('');
         }
       }
     }
+  }
 
   List<String> pressedButton(String button, String userQuestion, String userAnswer) {
     if (commandMap.containsKey(button)) {
@@ -61,7 +64,7 @@ class ButtonPad {
     return _grid;
   }
 
- void squareGrid() {
+  void squareGrid() {
     for (var row in _grid) {
       while(row.length < maxWidth) {
         row.add('');
