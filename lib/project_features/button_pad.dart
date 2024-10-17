@@ -2,9 +2,9 @@ import 'package:calculator/base_project/command_export.dart';
 
 class ButtonPad {
   List<List<String?>> _grid = [];
-  final int maxHeight = 5; // Maximum number of rows
+  final int maxHeight = 6; // Maximum number of rows
   final int maxWidth = 4; // Number of columns (fixed)
-  List<String> basicButtons = ['%', '/', '9', '8', '7', '*', '6', '5', '4', '-', '3', '2', '1', '+', '0', '.', '='];
+  List<String> basicButtons = ['%', '/', '9', '8', '7', '*', '6', '5', '4', '-', '3', '2', '1', '+', '0', '.', '=', '(', ')'];
   late Map<String, Command> commandMap;
 
   ButtonPad() {
@@ -15,6 +15,7 @@ class ButtonPad {
   // Initialize the grid with the provided buttons
   void _initializeGrid() {
     _grid = [['C', 'DEL', '%', '/'],
+             ['(', ')', '', ''],
              ['9', '8', '7', '*'],
              ['6', '5', '4', '-'],
              ['3', '2', '1', '+'],
