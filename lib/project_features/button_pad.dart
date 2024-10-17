@@ -14,14 +14,14 @@ class ButtonPad {
 
   // Initialize the grid with the provided buttons
   void _initializeGrid() {
-    _grid = [['C', 'DEL', '%', 'Settings'],
-              ['(', ')', '√', '/'],
+    _grid = [['C', 'DEL', 'M+', 'Settings'],
+              ['(', ')', '%', '/'],
               ['7', '8', '9', '*'],
               ['4', '5', '6', '-'],
               ['1', '2', '3', '+'],
               ['0', '.', 'ANS', '±'],
               ['x²', 'xʸ', 'π', 'log'],
-              ['!', 'ln', 'e', ''],
+              ['!', 'ln', 'e', '√'],
               ['sin', 'cos', 'tan', '='],
     ];
 
