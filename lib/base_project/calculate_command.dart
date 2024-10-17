@@ -3,7 +3,6 @@ import '../project_features/validate.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class CalculateCommand implements Command {
-  final List<String> _basicOperators = ['+', '-', '*', '/'];
 
   @override
   List<String> execute(String userQuestion, String userAnswer) {
