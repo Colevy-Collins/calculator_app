@@ -14,13 +14,13 @@ class ButtonPad {
 
   // Initialize the grid with the provided buttons
   void _initializeGrid() {
-    _grid = [['C', 'DEL', '%', '/'],
-              ['(', ')', '√', 'log'],
+    _grid = [['C', 'DEL', '%', 'Settings'],
+              ['(', ')', '√', '/'],
               ['7', '8', '9', '*'],
               ['4', '5', '6', '-'],
               ['1', '2', '3', '+'],
               ['0', '.', 'ANS', '±'],
-              ['x²', 'xʸ', 'π', ''],
+              ['x²', 'xʸ', 'π', 'log'],
               ['!', 'ln', 'e', ''],
               ['sin', 'cos', 'tan', '='],
     ];
@@ -43,6 +43,7 @@ class ButtonPad {
       //'sin': SinCommand(),
       //'cos': CosCommand(),
       //'tan': TanCommand(),
+      //'Settings': SettingsCommand(),
     };
 
     // Add commands for each number and operator
