@@ -44,6 +44,7 @@ class ButtonPad {
       //'cos': CosCommand(),
       //'tan': TanCommand(),
       //'Settings': SettingsCommand(),
+      //'M+': MemoryAddCommand(),
     };
 
     // Add commands for each number and operator
