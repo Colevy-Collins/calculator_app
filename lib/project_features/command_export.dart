@@ -1,2 +1,14 @@
 export 'button_pad.dart';
 export 'validate.dart';
+export 'add_to_memory_button.dart';
+export 'e_function_button.dart';
+export 'factorial_button.dart';
+export 'log_base_10_button.dart';
+export 'logarithmic_function_button.dart';
+export 'pi_button.dart';
+export 'positive_negative_button.dart';
+export 'power_button.dart';
+export 'settings_menu_button.dart';
+export 'square_button.dart';
+export 'square_root_button.dart';
+export 'trig_functions_button.dart';

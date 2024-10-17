@@ -15,11 +15,14 @@ class ButtonPad {
   // Initialize the grid with the provided buttons
   void _initializeGrid() {
     _grid = [['C', 'DEL', '%', '/'],
-             ['(', ')', '', ''],
-             ['9', '8', '7', '*'],
-             ['6', '5', '4', '-'],
-             ['3', '2', '1', '+'],
-             ['0', '.', 'ANS', '='],
+              ['(', ')', '√', 'log'],
+              ['7', '8', '9', '*'],
+              ['4', '5', '6', '-'],
+              ['1', '2', '3', '+'],
+              ['0', '.', 'ANS', '±'],
+              ['x²', 'xʸ', 'π', ''],
+              ['!', 'ln', 'e', ''],
+              ['sin', 'cos', 'tan', '='],
     ];
 
     // Initialize the command map
@@ -28,6 +31,18 @@ class ButtonPad {
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
       'ANS': ANSCommand(),
+      //'√': SquareRootCommand(),
+      //'log': LogBase10Command(),
+      //'x²': SquareCommand(),
+      //'xʸ': PowerCommand(),
+      //'±': PositiveNegativeCommand(),
+      //'π': PiCommand(),
+      //'!': FactorialCommand(),
+      //'ln': NaturalLogCommand(),
+      //'e': ECommand(),
+      //'sin': SinCommand(),
+      //'cos': CosCommand(),
+      //'tan': TanCommand(),
     };
 
     // Add commands for each number and operator
