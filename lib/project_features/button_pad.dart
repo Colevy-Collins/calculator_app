@@ -31,7 +31,7 @@ class ButtonPad {
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
       'ANS': ANSCommand(),
-      //'√': SquareRootCommand(),
+      '√': SquareRootCommand(),
       //'log': LogBase10Command(),
       //'x²': SquareCommand(),
       //'xʸ': PowerCommand(),
@@ -44,7 +44,7 @@ class ButtonPad {
       //'cos': CosCommand(),
       //'tan': TanCommand(),
       //'Settings': SettingsCommand(),
-      //'M+': MemoryAddCommand(),
+      'M+': MemoryAddCommand(),
     };
 
     // Add commands for each number and operator

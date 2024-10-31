@@ -12,6 +12,10 @@ class MemoryAddCommand implements Command {
     
       answerMemory.add(userAnswer);
 
+      answerMemory.forEach((answer){
+        print(answer);
+      });
+
     return [question, answer];
   }
 }
