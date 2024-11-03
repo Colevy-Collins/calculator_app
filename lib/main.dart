@@ -1,7 +1,6 @@
-import 'package:calculator/button.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator/main.dart';
-import 'package:math_expressions/math_expressions.dart';
+import 'package:calculator/base_project/command_export.dart';
+import 'package:calculator/project_features/command_export.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,57 +30,14 @@ class _HomePageState extends State<HomePage> {
   String userQuestion = '';
   String userAnswer = '';
 
-  final List buttons = [
-    'C', // buttons[0]
-    'DEL', // buttons[1]
-    '%', // buttons[2]
-    '/', // buttons[3]
-    '9', // buttons[4]
-    '8', // buttons[5]
-    '7', // buttons[6]
-    '*', // buttons[7]
-    '6', // buttons[8]
-    '5', // buttons[9]
-    '4', // buttons[10]
-    '-', // buttons[11]
-    '3', // buttons[12]
-    '2', // buttons[13]
-    '1', // buttons[14]
-    '+', // buttons[15]
-    '0', // buttons[16]
-    '.', // buttons[17]
-    'ANS', // buttons[18]
-    '=', // buttons[19]
-  ];
-
-  void calculateExpression() {
-    Parser p = Parser();
-    Expression expression = p.parse(userQuestion);
-    ContextModel cm = ContextModel();
-    double eval = expression.evaluate(EvaluationType.REAL, cm);
-
-    setState(() {
-      userAnswer = eval.toString();
-    });
-  }
+  final List<List<String?>> buttons = ButtonPad().getGrid();
 
   void pressedButton(String button) {
-    if (button == 'C') {
-      setState(() {
-        userQuestion = '';
-        userAnswer = '';
-      });
-    } else if (button == 'DEL') {
-      setState(() {
-        userQuestion = userQuestion.substring(0, userQuestion.length - 1);
-      });
-    } else if (button == '=') {
-      calculateExpression();
-    } else {
-      setState(() {
-        userQuestion += button;
-      });
-    }
+    List<String> result = ButtonPad().pressedButton(button, userQuestion, userAnswer);
+    setState(() {
+      userQuestion = result[0];
+      userAnswer = result[1];
+    });
   }
 
   @override
@@ -126,26 +82,45 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        // buttons
+        // Buttons with AspectRatio for consistent sizing
         Expanded(
           flex: 2,
-          child: Container(
-              height: 200,
-              child: GridView.builder(
-                  itemCount: buttons.length,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
-                  itemBuilder: (context, index) {
-                    return MyButton(
-                      child: buttons[index],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              int rows = buttons.length; // Number of rows in the grid
+              int columns = buttons[0].length; // Number of columns in the grid
+              double buttonWidth = constraints.maxWidth / columns; // Adjust width based on columns
+              double buttonHeight = constraints.maxHeight / rows; // Adjust height based on rows
+
+              return GridView.builder(
+                itemCount: rows * columns, // Total buttons count
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: columns, // Use dynamic column count
+                  childAspectRatio: buttonWidth / buttonHeight,
+                ),
+                itemBuilder: (context, index) {
+                  // Calculate the row and column
+                  int row = index ~/ columns; // Integer division to get row
+                  int col = index % columns; // Modulo to get column
+                  String buttonLabel = buttons[row][col] ??
+                      ''; // Provide a default empty string if null
+
+                  return AspectRatio(
+                    aspectRatio: 1, // Ensures the buttons are square
+                    child: MyButton(
+                      child: buttonLabel, // Button label
                       buttonColor: Colors.deepPurple[100],
                       textColor: Colors.black,
                       function: () {
-                        pressedButton(buttons[index]);
+                        pressedButton(buttonLabel);
                       },
-                    );
-                  })),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ]),
     );

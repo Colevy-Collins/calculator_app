@@ -1,0 +1,12 @@
+CodeSmell 1: Rigidity in the UI makes it hard to see all button on different sized screens.
+   Refactor 1: Introduce Layout Manager via the LayoutBuilder instead of container and the addition of AspectRatio wrapped around the buttons
+CodeSmell 2: Deep Nesting of if statements in the pressButton method make the code hard to read and maintain.
+   Refactor 2: utilize the Strategy Pattern to create a new class for each button and implement the pressButton method in each class
+CodeSmell 3: Rigidity with the button array makes it hart to work with and add/remove buttons
+    Refactor 3: Extract a class for the button array to allow for the easy maintenance of buttons and their location on the screen
+CodeSmell 4: HomePage class is doing too much and is not cohesive
+    Refactor 4: Extract the button array and the pressButton method into a new class to separate
+CodeSmell 5: Fragility in the code makes it hard to add new buttons
+    Refactor 5: Add code to ensure that there is not empty space in the array and that empty buttons do not get working functions.
+CodeSmell 7: Fragility in the calculate_command lead to uncaught errors
+    Refactor 7: Add a validation class to contain all needed validation checks for the calculate_command
