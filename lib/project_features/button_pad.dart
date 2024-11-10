@@ -41,9 +41,9 @@ class ButtonPad {
       //'!': FactorialCommand(),
       //'ln': NaturalLogCommand(),
       //'e': ECommand(),
-      //'sin': SinCommand(),
-      //'cos': CosCommand(),
-      //'tan': TanCommand(),
+      'sin': SinCommand(CalculateCommand()),
+      'cos': CosCommand(CalculateCommand()),
+      'tan': TanCommand(CalculateCommand()),
       //'Settings': SettingsCommand(),
       //'M+': MemoryAddCommand(),
     };

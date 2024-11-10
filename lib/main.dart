@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -29,21 +28,59 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String userQuestion = '';
   String userAnswer = '';
+  Color menuColor = Colors.deepPurple; // Default color for the menu
 
   final List<List<String?>> buttons = ButtonPad().getGrid();
 
   void pressedButton(String button) {
-    List<String> result = ButtonPad().pressedButton(button, userQuestion, userAnswer);
-    setState(() {
-      userQuestion = result[0];
-      userAnswer = result[1];
-    });
+    if (button == 'Settings') {
+      _openSettingsMenu();
+    } else {
+      List<String> result = ButtonPad().pressedButton(button, userQuestion, userAnswer);
+      setState(() {
+        userQuestion = result[0];
+        userAnswer = result[1];
+      });
+    }
   }
+
+  void _openSettingsMenu() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String buttonText = menuColor == Colors.blue ? 'Change Menu Color to Purple' : 'Change Menu Color to Blue';
+        Color nextColor = menuColor == Colors.blue ? Colors.purple : Colors.blue;
+
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Settings Menu', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      menuColor = nextColor; // Update the menu color
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text(buttonText),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: menuColor.withOpacity(0.2), // Apply menu color to background for effect
       body: Column(children: [
         // Q and A
         Expanded(
