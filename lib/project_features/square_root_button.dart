@@ -6,7 +6,7 @@ class SquareRootCommand implements Command {
     String question = userQuestion;
     String answer = userAnswer;
 
-    question = userQuestion + "Sqrt(";
+    question = userQuestion + "sqrt(";
 
     return [question, answer];
 
