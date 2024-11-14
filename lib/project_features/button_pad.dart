@@ -1,5 +1,5 @@
 import 'package:calculator/base_project/command_export.dart';
-import 'package:calculator/project_features//command_export.dart';
+import 'package:calculator/project_features/command_export.dart';
 
 class ButtonPad {
   List<List<String?>> _grid = [];
@@ -22,7 +22,7 @@ class ButtonPad {
               ['1', '2', '3', '+'],
               ['0', '.', 'ANS', '±'],
               ['x²', 'xʸ', 'π', 'log'],
-              ['!', 'ln', 'e', '√'],
+              ['n!', 'Log10()', 'e', '√'],
               ['sin', 'cos', 'tan', '='],
     ];
 
@@ -38,8 +38,8 @@ class ButtonPad {
       //'xʸ': PowerCommand(),
       //'±': PositiveNegativeCommand(),
       //'π': PiCommand(),
-      //'!': FactorialCommand(),
-      //'ln': NaturalLogCommand(),
+      'n!': FactorialCommand(),
+      'log10()': NaturalLogCommand(),
       //'e': ECommand(),
       //'sin': SinCommand(),
       //'cos': CosCommand(),

@@ -12,7 +12,8 @@ dependencies:
   flutter:
     sdk: flutter 
   cupertino_icons: ^1.0.2
-  math_expressions: ^2.3.0 
+  math_expressions: ^2.3.0
+  #add dart_numerics library here
 
 dev_dependencies:
   test: ^1.17.0
