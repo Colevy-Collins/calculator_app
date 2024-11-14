@@ -39,7 +39,7 @@ class ButtonPad {
       //'±': PositiveNegativeCommand(),
       //'π': PiCommand(),
       'n!': FactorialCommand(),
-      'log10()': NaturalLogCommand(),
+      'Log10()': NaturalLogCommand(),
       //'e': ECommand(),
       //'sin': SinCommand(),
       //'cos': CosCommand(),

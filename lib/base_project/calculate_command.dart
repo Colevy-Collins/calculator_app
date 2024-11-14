@@ -1,6 +1,10 @@
 import 'command.dart';
 import '../project_features/validate.dart';
 import 'package:math_expressions/math_expressions.dart';
+import '../project_features/calculateLog10.dart';
+import '../project_features/calculateFactorial.dart';
+
+
 
 class CalculateCommand implements Command {
 
@@ -10,11 +14,11 @@ class CalculateCommand implements Command {
     String question = validator.getQuestion;
     String answer = validator.getAnswer;
 
-
     if(validator.getError == false) {
-      // create temp variable here to hold question value
-      //check if has log10 and send to log here
-      // check if has factorial and send to factorial here
+      String questionHolder = question;
+      question = CalculateLog10.processLog10(question, this);
+      question = CalculateFactorial.processFactorial(question, this);
+      print(question);
 
       Parser parser = Parser();
       Expression expression = parser.parse(question);
@@ -22,6 +26,7 @@ class CalculateCommand implements Command {
       double eval = expression.evaluate(EvaluationType.REAL, cm);
       answer = eval.toString();
       // set question value to the tempQuestion value
+      question = questionHolder;
     }
 
     return [question, answer]; // Returns the evaluated result as a string
