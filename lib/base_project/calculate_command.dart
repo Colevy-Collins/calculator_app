@@ -18,7 +18,6 @@ class CalculateCommand implements Command {
       String questionHolder = question;
       question = CalculateLog10.processLog10(question, this);
       question = CalculateFactorial.processFactorial(question, this);
-      print(question);
 
       Parser parser = Parser();
       Expression expression = parser.parse(question);
