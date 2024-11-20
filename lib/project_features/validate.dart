@@ -1,5 +1,5 @@
 class Validator {
-  static const List<String> _basicOperators = ['+', '-', '*', '/'];
+  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt'];
   late String _question;
   late String _answer;
   bool _error = false;
@@ -21,7 +21,7 @@ class Validator {
   void validateOperatorBeforeParentheses() {
     // Add * before ( if it does not have a basic operator before it
     for (int i = 1; i < _question.length; i++) {
-      if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1])) {
+      if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't')))  {
         _question = _question.substring(0, i) + '*' + _question.substring(i);
         i++; // Move to the next character to avoid infinite loop
       }
