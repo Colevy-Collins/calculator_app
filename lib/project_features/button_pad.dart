@@ -35,7 +35,7 @@ class ButtonPad {
       '√': SquareRootCommand(),
       //'log': LogBase10Command(),
       'x²': SquareCommand(),
-      //'xʸ': PowerCommand(),
+      'xʸ': PowerCommand(),
       //'±': PositiveNegativeCommand(),
       //'π': PiCommand(),
       //'!': FactorialCommand(),
