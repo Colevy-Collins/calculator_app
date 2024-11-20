@@ -46,41 +46,54 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.deepPurple[200],
       body: Column(children: [
         // Q and A
+     Expanded(
+  flex: 1,
+  child: Container(
+    padding: EdgeInsets.only(left: 5, right: 5, top: 15),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
         Expanded(
-          child: Container(
-            padding: EdgeInsets.only(left: 25, right: 25, top: 75),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        userQuestion,
-                        style: TextStyle(
-                          color: Colors.deepPurple[900],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
-                    ],
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  key: Key('userQuestion'),
+                  userQuestion,
+                  style: TextStyle(
+                    color: Colors.deepPurple[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 48,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        userAnswer,
-                        style: TextStyle(
-                          color: Colors.deepPurple[900],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
-                    ],
-                  )
-                ]),
-            height: 200,
+                ),
+              ),
+            ],
           ),
         ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Text(
+                  key: Key('userAnswer'),
+                  userAnswer,
+                  style: TextStyle(
+                    color: Colors.deepPurple[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 48,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    height: 200,
+  ),
+),
 
         // Buttons with AspectRatio for consistent sizing
         Expanded(

@@ -1,6 +1,7 @@
 import 'command.dart';
 import '../project_features/validate.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:dart_numerics/dart_numerics.dart' as numerics;
 
 class CalculateCommand implements Command {
 
