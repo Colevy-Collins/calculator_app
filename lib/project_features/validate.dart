@@ -1,5 +1,5 @@
 class Validator {
-  static const List<String> _basicOperators = ['+', '-', '*', '/'];
+  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt'];
   late String _question;
   late String _answer;
   bool _error = false;
@@ -22,8 +22,12 @@ class Validator {
   void validateOperatorBeforeParentheses() {
     // Loop through the question string to identify where `*` should be inserted
     for (int i = 1; i < _question.length; i++) {
+
       // Case 1: Insert * if a number or ')' is directly followed by Log10(...) or !(...)
-      if (_isDigitOrClosingParen(i - 1) && (_isLog10Start(i) || _isFactorialStart(i))) {
+      if (_isDigitOrClosingParen(i - 1) && (_isLog10Start(i) || _isFactorialStart(i))) {                                                    // MOLLOYS REPLACEMENT OF MASTER
+
+      // if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't')))  {         ORIGINAL MASTER IF STATEMENT
+
         _question = _question.substring(0, i) + '*' + _question.substring(i);
         i++; // Move to the next character to avoid infinite loop
       }
