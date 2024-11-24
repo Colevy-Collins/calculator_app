@@ -50,3 +50,4 @@ class NaturalLogCommand implements Command {
     return [question, answer];
   }
 }
+//checkpoint
