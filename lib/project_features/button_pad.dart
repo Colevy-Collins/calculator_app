@@ -32,6 +32,17 @@ class ButtonPad {
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
       'ANS': ANSCommand(),
+
+      //'√': SquareRootCommand(),
+   //   'log': LogBase10Command(),
+      //'x²': SquareCommand(),
+      //'xʸ': PowerCommand(),
+      //'±': PositiveNegativeCommand(),
+      //'π': PiCommand(),
+      //'!': FactorialCommand(),
+      'ln': NaturalLogCommand(),
+      'e': ECommand(),
+
       '√': SquareRootCommand(),
       //'log': LogBase10Command(),
       'x²': SquareCommand(),
@@ -42,6 +53,7 @@ class ButtonPad {
       'n!': FactorialCommand(),
       'Log10()': NaturalLogCommand(),
       //'e': ECommand(),
+
       //'sin': SinCommand(),
       //'cos': CosCommand(),
       //'tan': TanCommand(),
