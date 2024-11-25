@@ -1,5 +1,5 @@
 class Validator {
-  static const List<String> _basicOperators = ['+', '-', '*', '/'];
+  static const List<String> _basicOperators = ['+', '-', '*', '/','n'];
   late String _question;
   late String _answer;
   bool _error = false;
