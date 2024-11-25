@@ -1,5 +1,5 @@
 import 'package:calculator/base_project/command_export.dart';
-import 'package:calculator/project_features//command_export.dart';
+import 'package:calculator/project_features/command_export.dart';
 
 class ButtonPad {
   List<List<String?>> _grid = [];
@@ -22,7 +22,7 @@ class ButtonPad {
               ['1', '2', '3', '+'],
               ['0', '.', 'ANS', '±'],
               ['x²', 'xʸ', 'π', 'log'],
-              ['!', 'ln', 'e', '√'],
+              ['n!', 'Log10()', 'e', '√'],
               ['sin', 'cos', 'tan', '='],
     ];
 
@@ -32,6 +32,7 @@ class ButtonPad {
       'DEL': DeleteCommand(),
       '=': CalculateCommand(),
       'ANS': ANSCommand(),
+
       //'√': SquareRootCommand(),
    //   'log': LogBase10Command(),
       //'x²': SquareCommand(),
@@ -41,11 +42,23 @@ class ButtonPad {
       //'!': FactorialCommand(),
       'ln': NaturalLogCommand(),
       'e': ECommand(),
+
+      '√': SquareRootCommand(),
+      //'log': LogBase10Command(),
+      'x²': SquareCommand(),
+      'xʸ': PowerCommand(),
+      //'±': PositiveNegativeCommand(),
+      //'π': PiCommand(),
+
+      'n!': FactorialCommand(),
+      'Log10()': NaturalLogCommand(),
+      //'e': ECommand(),
+
       //'sin': SinCommand(),
       //'cos': CosCommand(),
       //'tan': TanCommand(),
       //'Settings': SettingsCommand(),
-      //'M+': MemoryAddCommand(),
+      'M+': MemoryAddCommand(),
     };
 
     // Add commands for each number and operator
