@@ -8,7 +8,12 @@ class MemoryAddCommand implements Command {
     String question = userQuestion;
     String answer = userAnswer;
     
+    if(userAnswer.isEmpty ?? true){
+      // do not add to answerMemory
+    }
+    else{
       answerMemory.add(userAnswer);
+    }
 
     return [question, answer];
   }
