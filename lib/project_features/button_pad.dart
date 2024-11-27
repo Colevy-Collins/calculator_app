@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:calculator/base_project/command_export.dart';
 import 'package:calculator/project_features//command_export.dart';
 
@@ -7,8 +9,9 @@ class ButtonPad {
   final int maxWidth = 4; // Number of columns (fixed)
   List<String> basicButtons = ['%', '/', '9', '8', '7', '*', '6', '5', '4', '-', '3', '2', '1', '+', '0', '.', '=', '(', ')'];
   late Map<String, Command> commandMap;
+  final VoidCallback onSettingsPressed;
 
-  ButtonPad() {
+  ButtonPad({required this.onSettingsPressed}) {
     _initializeGrid();
     squareGrid();
   }
@@ -41,10 +44,10 @@ class ButtonPad {
       //'!': FactorialCommand(),
       //'ln': NaturalLogCommand(),
       //'e': ECommand(),
-      'sin': SinCommand(CalculateCommand()),
-      'cos': CosCommand(CalculateCommand()),
-      'tan': TanCommand(CalculateCommand()),
-      //'Settings': SettingsCommand(),
+      'sin': SinCommand(),
+      'cos': CosCommand(),
+      'tan': TanCommand(),
+      'Settings': SettingsCommand(onSettingsPressed: onSettingsPressed),
       //'M+': MemoryAddCommand(),
     };
 
