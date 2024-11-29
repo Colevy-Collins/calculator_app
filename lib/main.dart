@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -29,113 +28,125 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String userQuestion = '';
   String userAnswer = '';
+  Color menuColor = Colors.deepPurple;
 
-  final List<List<String?>> buttons = ButtonPad().getGrid();
+  late final ButtonPad buttonPad;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonPad = ButtonPad(onSettingsPressed: _openSettingsMenu);
+  }
 
   void pressedButton(String button) {
-    List<String> result = ButtonPad().pressedButton(button, userQuestion, userAnswer);
+    List<String> result = buttonPad.pressedButton(button, userQuestion, userAnswer);
     setState(() {
       userQuestion = result[0];
       userAnswer = result[1];
     });
   }
 
+  void _openSettingsMenu() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SettingsWidget(
+          currentColor: menuColor,
+          onColorChange: (Color newColor) {
+            setState(() {
+              menuColor = newColor; // Update the menu color
+            });
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
-      body: Column(children: [
-        // Q and A
-     Expanded(
-  flex: 1,
-  child: Container(
-    padding: EdgeInsets.only(left: 5, right: 5, top: 15),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  key: Key('userQuestion'),
-                  userQuestion,
-                  style: TextStyle(
-                    color: Colors.deepPurple[900],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 48,
+      backgroundColor: menuColor.withOpacity(0.2), // Apply menu color to background for effect
+      body: Column(
+        children: [
+          // Q and A
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 75),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        userQuestion,
+                        style: TextStyle(
+                          color: Colors.deepPurple[900],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        userAnswer,
+                        style: TextStyle(
+                          color: Colors.deepPurple[900],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-            ],
+              height: 200,
+            ),
           ),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Text(
-                  key: Key('userAnswer'),
-                  userAnswer,
-                  style: TextStyle(
-                    color: Colors.deepPurple[900],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 48,
+
+          // Buttons with AspectRatio for consistent sizing
+          Expanded(
+            flex: 2,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                int rows = buttonPad.getGrid().length; // Number of rows in the grid
+                int columns = buttonPad.getGrid()[0].length; // Number of columns in the grid
+                double buttonWidth = constraints.maxWidth / columns; // Adjust width based on columns
+                double buttonHeight = constraints.maxHeight / rows; // Adjust height based on rows
+
+                return GridView.builder(
+                  itemCount: rows * columns, // Total buttons count
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns, // Use dynamic column count
+                    childAspectRatio: buttonWidth / buttonHeight,
                   ),
-                ),
-              ),
-            ],
+                  itemBuilder: (context, index) {
+                    int row = index ~/ columns; // Integer division to get row
+                    int col = index % columns; // Modulo to get column
+                    String buttonLabel = buttonPad.getGrid()[row][col] ?? '';
+
+                    return AspectRatio(
+                      aspectRatio: 1, // Ensures the buttons are square
+                      child: MyButton(
+                        child: buttonLabel, // Button label
+                        buttonColor: Colors.deepPurple[100],
+                        textColor: Colors.black,
+                        function: () {
+                          pressedButton(buttonLabel);
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
-        ),
-      ],
-    ),
-    height: 200,
-  ),
-),
-
-        // Buttons with AspectRatio for consistent sizing
-        Expanded(
-          flex: 2,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              int rows = buttons.length; // Number of rows in the grid
-              int columns = buttons[0].length; // Number of columns in the grid
-              double buttonWidth = constraints.maxWidth / columns; // Adjust width based on columns
-              double buttonHeight = constraints.maxHeight / rows; // Adjust height based on rows
-
-              return GridView.builder(
-                itemCount: rows * columns, // Total buttons count
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columns, // Use dynamic column count
-                  childAspectRatio: buttonWidth / buttonHeight,
-                ),
-                itemBuilder: (context, index) {
-                  // Calculate the row and column
-                  int row = index ~/ columns; // Integer division to get row
-                  int col = index % columns; // Modulo to get column
-                  String buttonLabel = buttons[row][col] ??
-                      ''; // Provide a default empty string if null
-
-                  return AspectRatio(
-                    aspectRatio: 1, // Ensures the buttons are square
-                    child: MyButton(
-                      child: buttonLabel, // Button label
-                      buttonColor: Colors.deepPurple[100],
-                      textColor: Colors.black,
-                      function: () {
-                        pressedButton(buttonLabel);
-                      },
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
+
