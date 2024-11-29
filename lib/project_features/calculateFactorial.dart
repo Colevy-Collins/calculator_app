@@ -17,7 +17,8 @@ class CalculateFactorial {
         String evaluatedContent = calculator.execute(innerContent, "").last;
 
         if (_isNumeric(evaluatedContent)) {
-          int result = factorial(int.parse(evaluatedContent));
+          double? num = double.parse(evaluatedContent);
+          int result = factorial(num.toInt());
           return result.toString();
         } else {
           throw StateError("Inner content inside factorial is not a valid number or resolvable equation: $evaluatedContent");
@@ -36,6 +37,10 @@ class CalculateFactorial {
 
   // Helper function to check if a string is a numeric value
   static bool _isNumeric(String str) {
-    return int.tryParse(str) != null;
+    // Try to parse the string as a double
+    double? num = double.parse(str);
+
+    // Check if parsing succeeded and if it's a whole number
+    return num != null && num % 1 == 0;
   }
 }

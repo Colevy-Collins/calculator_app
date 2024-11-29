@@ -1,9 +1,9 @@
 import '../base_project/command.dart';
 
 
-class NaturalLogCommand implements Command {
+class LogBase10Command implements Command {
 
-  NaturalLogCommand();
+  LogBase10Command();
 
   @override
   List<String> execute(String userQuestion, String userAnswer) {

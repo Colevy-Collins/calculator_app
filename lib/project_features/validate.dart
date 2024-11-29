@@ -1,5 +1,5 @@
 class Validator {
-  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt'];
+  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt','!',"n"];
   late String _question;
   late String _answer;
   bool _error = false;
@@ -23,10 +23,24 @@ class Validator {
     // Loop through the question string to identify where `*` should be inserted
     for (int i = 1; i < _question.length; i++) {
 
-      // Case 1: Insert * if a number or ')' is directly followed by Log10(...) or !(...)
-      if (_isDigitOrClosingParen(i - 1) && (_isLog10Start(i) || _isFactorialStart(i))) {                                                    // MOLLOYS REPLACEMENT OF MASTER
+      if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't')))  {
 
-      // if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't')))  {         ORIGINAL MASTER IF STATEMENT
+        if(i > 3) {
+          if(_question[i-3] == 'g') {
+            continue;
+          }
+        }
+        _question = _question.substring(0, i) + '*' + _question.substring(i);
+        i++;
+      }
+
+      if ((_question[i] == 'L' || _question[i] == 'l') && !_basicOperators.contains(_question[i - 1]))  {
+        _question = _question.substring(0, i) + '*' + _question.substring(i);
+        i++;
+      }
+
+      // Case 1: Insert * if a number or ')' is directly followed by Log10(...) or !(...)
+      if (_isDigitOrClosingParen(i - 1) && (_isLog10Start(i) || _isFactorialStart(i))) {
 
         _question = _question.substring(0, i) + '*' + _question.substring(i);
         i++; // Move to the next character to avoid infinite loop
