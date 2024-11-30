@@ -17,13 +17,17 @@ class CalculateCommand implements Command {
       question = CalculateLog10.processLog10(question, this);
       question = CalculateFactorial.processFactorial(question, this);
 
-      Parser parser = Parser();
-      Expression expression = parser.parse(question);
-      ContextModel cm = ContextModel();
-      double eval = expression.evaluate(EvaluationType.REAL, cm);
-      answer = eval.toString();
-      // set question value to the tempQuestion value
-      question = questionHolder;
+      try {
+        Parser parser = Parser();
+        Expression expression = parser.parse(question);
+        ContextModel cm = ContextModel();
+        double eval = expression.evaluate(EvaluationType.REAL, cm);
+        answer = eval.toString();
+        // set question value to the tempQuestion value
+        question = questionHolder;
+      } catch (e) {
+        answer = "${e.toString()}";
+      }
     }
 
     return [question, answer]; // Returns the evaluated result as a string

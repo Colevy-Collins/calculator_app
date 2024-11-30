@@ -1,5 +1,5 @@
 class Validator {
-  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt','!',"n"];
+  static const List<String> _basicOperators = ['+', '-', '*', '/', 'sqrt','!',"n", "s", "t", "r", "q", "("];
   late String _question;
   late String _answer;
   bool _error = false;
@@ -23,7 +23,7 @@ class Validator {
     // Loop through the question string to identify where `*` should be inserted
     for (int i = 1; i < _question.length; i++) {
 
-      if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't')))  {
+      if (_question[i] == '(' && !_basicOperators.contains(_question[i - 1]) && (_question[i] == '(' && (_question[i-1] != 't') ))  {
 
         if(i > 3) {
           if(_question[i-3] == 'g') {
@@ -37,6 +37,23 @@ class Validator {
       if ((_question[i] == 'L' || _question[i] == 'l') && !_basicOperators.contains(_question[i - 1]))  {
         _question = _question.substring(0, i) + '*' + _question.substring(i);
         i++;
+      }
+
+      if ((_question[i] == 'c') && !_basicOperators.contains(_question[i - 1]))  {
+        _question = _question.substring(0, i) + '*' + _question.substring(i);
+        i++;
+      }
+
+      if ((_question[i] == 't') && !_basicOperators.contains(_question[i - 1]))  {
+        _question = _question.substring(0, i) + '*' + _question.substring(i);
+        i++;
+      }
+
+      if ((_question[i] == 'i') )  {
+        if ((_question[i-1] == 's') && !_basicOperators.contains(_question[i - 2]))  {
+          _question = _question.substring(0, i-1) + '*' + _question.substring(i-1);
+          i++;
+        }
       }
 
       // Case 1: Insert * if a number or ')' is directly followed by Log10(...) or !(...)
