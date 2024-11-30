@@ -47,7 +47,7 @@ class ButtonPad {
       'sin': SinCommand(),
       'cos': CosCommand(),
       'tan': TanCommand(),
-      'Settings': SettingsCommand(),
+      'Settings': SettingsCommand(onSettingsPressed: onSettingsPressed),
       'M+': MemoryAddCommand(),
     };
 
