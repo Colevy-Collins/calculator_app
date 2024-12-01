@@ -12,7 +12,7 @@ import 'package:calculator/main.dart';
 Future<void> tapButtonAndVerify(tester, input) async{
   await tester.tap(find.text('$input'));
   await tester.pump();
-  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString().contains('1'), isTrue);
+  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString().contains('$input'), isTrue);
 
   await tester.tap(find.text('C'));
   await tester.pump();

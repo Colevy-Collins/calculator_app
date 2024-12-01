@@ -1066,6 +1066,9 @@ void main() {
     await tester.tap(find.text('M+'));
     await tester.pump();
 
+    await tester.tap(find.text('='));
+    await tester.pumpAndSettle();
+
     expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString().contains('2+2+4.0'), isTrue);
 
     expect(find.byKey(Key('userAnswer')).evaluate().single.widget.toString().contains('8.0'), isTrue);

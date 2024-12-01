@@ -110,3 +110,13 @@ Note: You can build complex expressions using multiple operations.
 ## Troubleshooting
 - **Unexpected Results**: Check the input for any syntax errors.
 - **Application does not display results**: Check the input for any syntax errors.
+
+## Testing the Application
+- To run the basic tests for the application, run the following command in your terminal:
+  ```
+  flutter test 
+  ```
+- To run advanced test to observe the application as it performs simulated actions.
+   ```
+   flutter test integration_test/app_test.dart  
+   ```
