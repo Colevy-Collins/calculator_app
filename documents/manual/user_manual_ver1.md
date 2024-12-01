@@ -52,6 +52,10 @@ Note: You can build complex expressions using multiple operations.
 
 ### Memory Functions
 1. **Memory Addition (M+)**:
+    - Press the `M+` button to add the current answer to memory.
+    - Press the `M+` button again to take the currently saved number and 
+add it to the end of the question.
+    - Note: Only one number can be saved at a time. Once the number is used, it is no longer saved.
 
 ### Exponential Function
 1. **Square Function (x²)**:
