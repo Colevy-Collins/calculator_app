@@ -25,7 +25,7 @@ class ButtonPad {
               ['1', '2', '3', '+'],
               ['0', '.', 'ANS', '±'],
               ['x²', 'xʸ', 'π', 'ln('],
-              ['n!', 'Log10()', 'e', '√'],
+              ['!(', 'Log10()', 'e', '√'],
               ['sin', 'cos', 'tan', '='],
     ];
 
@@ -41,7 +41,7 @@ class ButtonPad {
       'xʸ': PowerCommand(),
       '±': PositiveNegativeCommand(),
       'π': PiCommand(),
-      'n!': FactorialCommand(),
+      '!(': FactorialCommand(),
       'ln(': NaturalLogCommand(),
       'e': ECommand(),
       'sin': SinCommand(),

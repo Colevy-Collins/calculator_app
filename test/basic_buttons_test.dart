@@ -16,7 +16,9 @@ Future<void> tapButtonAndVerify(tester, input) async{
 
   await tester.tap(find.text('C'));
   await tester.pump();
-  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString(), 'Text-[<\'userQuestion\'>]("", inherit: true, color: Color(0xff311b92), size: 48.0, weight: 700)');
+  String res = find.byKey(Key('userQuestion')).evaluate().single.widget.toString();
+  expect(res[24], '\"');
+  expect(res[25], '\"');
 }
 
 Future<void> verifyExpression(tester, input, answer) async {
@@ -40,8 +42,9 @@ Future<void> verifyExpression(tester, input, answer) async {
 
   await tester.tap(find.text('C'));
   await tester.pump();
-  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString(), 'Text-[<\'userQuestion\'>]("", inherit: true, color: Color(0xff311b92), size: 48.0, weight: 700)');
-}
+  String res2 = find.byKey(Key('userQuestion')).evaluate().single.widget.toString();
+  expect(res2[24], '\"');
+  expect(res2[25], '\"');}
 
 Future<void> verifyANS(tester, input) async {
   for (int i = 0; i < input.length; i++) {
@@ -69,7 +72,9 @@ Future<void> verifyANS(tester, input) async {
 
   await tester.tap(find.text('C'));
   await tester.pump();
-  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString(), 'Text-[<\'userQuestion\'>]("", inherit: true, color: Color(0xff311b92), size: 48.0, weight: 700)');
+  String res = find.byKey(Key('userQuestion')).evaluate().single.widget.toString();
+  expect(res[24], '\"');
+  expect(res[25], '\"');
 }
 
 Future<void> delAndVerify(tester) async{
@@ -83,7 +88,10 @@ Future<void> delAndVerify(tester) async{
 
   await tester.tap(find.text('DEL'));
   await tester.pump();
-  expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString(), 'Text-[<\'userQuestion\'>]("1", inherit: true, color: Color(0xff311b92), size: 48.0, weight: 700)');
+  String res = find.byKey(Key('userQuestion')).evaluate().single.widget.toString();
+  expect(res[24], '\"');
+  expect(res[25], '1');
+  expect(res[26], '\"');
 }
 
 void main() {

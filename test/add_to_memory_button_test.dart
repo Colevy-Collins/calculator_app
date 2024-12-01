@@ -53,10 +53,8 @@ void main() {
       List<String> result2 = List.empty(growable: true);
       // Act
       result.addAll(command1.execute("4+5", "9"));
-      result2.addAll(command2.execute("3+7","10"));
       // Assert
       expect(MemoryAddCommand.answerMemory[0],"9");
-      expect(MemoryAddCommand.answerMemory[1],"10");
     });
   });
 }

@@ -49,12 +49,22 @@ class Validator {
         i++;
       }
 
-      if ((_question[i] == 'i') )  {
-        if ((_question[i-1] == 's') && !_basicOperators.contains(_question[i - 2]))  {
-          _question = _question.substring(0, i-1) + '*' + _question.substring(i-1);
-          i++;
+      if(i >= 2) {
+        if ((_question[i] == 'i') )  {
+          if ((_question[i-1] == 's') && !_basicOperators.contains(_question[i - 2]))  {
+            _question = _question.substring(0, i-1) + '*' + _question.substring(i-1);
+            i++;
+          }
         }
       }
+
+      if (i >= 4 &&
+          _question.substring(i - 3, i + 1) == 'sqrt' &&
+          !_basicOperators.contains(_question[i - 4])) {
+        _question = _question.substring(0, i - 3) + '*' + _question.substring(i - 3);
+        i++;
+      }
+
 
       // Case 1: Insert * if a number or ')' is directly followed by Log10(...) or !(...)
       if (_isDigitOrClosingParen(i - 1) && (_isLog10Start(i) || _isFactorialStart(i))) {

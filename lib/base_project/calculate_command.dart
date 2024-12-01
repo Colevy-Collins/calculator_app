@@ -26,7 +26,15 @@ class CalculateCommand implements Command {
         // set question value to the tempQuestion value
         question = questionHolder;
       } catch (e) {
-        answer = "${e.toString()}";
+        if(e.toString() == "Bad state: No element") {
+          answer = "Error: Invalid Expression";
+        } else if(e.toString() == "RangeError (length): Invalid value: Valid value range is empty: -1") {
+          answer = "Error: Invalid Expression";
+        } else if(e.toString() == "Bad state: Variable not bound: Log10") {
+          answer = "Error: Invalid Expression";
+        }else{
+          throw e;
+        }
       }
     }
 

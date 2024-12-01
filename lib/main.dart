@@ -69,43 +69,51 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           // Q and A
-          Expanded(
+          Flexible(
             child: Container(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 75),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double fontSize = constraints.maxHeight * 0.2; // Adjust font size based on available height
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        userQuestion,
-                        style: TextStyle(
-                          color: Colors.deepPurple[900],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
+                      Row(
+                        children: [
+                          Flexible(child:
+                          Text(
+                            key: const Key('userQuestion'),
+                            userQuestion,
+                            style: TextStyle(
+                              color: Colors.deepPurple[900],
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSize,
+                            ),
+                          ),
+                          ),
+                        ],
                       ),
+                      Row(
+                        children: [
+                          Flexible(child:
+                          Text(
+                            key: const Key('userAnswer'),
+                            userAnswer,
+                            style: TextStyle(
+                              color: Colors.deepPurple[900],
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSize,
+                            ),
+                          ),
+                          ),
+                        ],
+                      )
                     ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        userAnswer,
-                        style: TextStyle(
-                          color: Colors.deepPurple[900],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+                  );
+                },
               ),
-              height: 200,
             ),
           ),
-
           // Buttons with AspectRatio for consistent sizing
           Expanded(
             flex: 2,
@@ -132,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                       aspectRatio: 1, // Ensures the buttons are square
                       child: MyButton(
                         child: buttonLabel, // Button label
-                        buttonColor: Colors.deepPurple[100],
+                        buttonColor: Colors.deepPurple[100]!, // Button color
                         textColor: Colors.black,
                         function: () {
                           pressedButton(buttonLabel);

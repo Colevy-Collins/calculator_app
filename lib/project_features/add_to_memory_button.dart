@@ -7,11 +7,10 @@ class MemoryAddCommand implements Command {
   List<String> execute(String userQuestion, String userAnswer) {
     String question = userQuestion;
     String answer = userAnswer;
-    
-    if(userAnswer.isEmpty ?? true){
-      // do not add to answerMemory
-    }
-    else{
+
+    if(answerMemory.isNotEmpty){
+      question = question + answerMemory.last;
+    } else {
       answerMemory.add(userAnswer);
     }
 
