@@ -1157,4 +1157,42 @@ void main() async {
 
 
     });
+
+    testWidgets('Test settings pop up', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Change Menu Color to Blue'), findsOneWidget);
+  });
+    testWidgets('Test settings change color', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Change Menu Color to Blue'));
+    await tester.pumpAndSettle();
+
+    expect((tester.widget<Scaffold>(find.byType(Scaffold)).backgroundColor), equals(Colors.blue.withOpacity(0.2)));
+  });
+    testWidgets('Test settings with expression', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text("Change Menu Color to Blue"));
+    await tester.pumpAndSettle();
+
+    await tapButtonAndVerify(tester, '2');
+    await tapButtonAndVerify(tester, '+');
+    await tapButtonAndVerify(tester, '2');
+
+    await tester.tap(find.text('='));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(Key('userAnswer')).evaluate().single.widget.toString().contains('4.0'), isTrue);
+  });
 }
