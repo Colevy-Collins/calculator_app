@@ -249,7 +249,7 @@ void main() {
 
   });
 
-  testWidgets('Test pie', (WidgetTester tester) async {
+  testWidgets('Test pie and ±', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
     await tester.tap(find.text('π'));
@@ -258,6 +258,10 @@ void main() {
     await tester.tap(find.text('='));
     await tester.pump();
 
+    await tester.tap(find.text('±'));
+    await tester.pump();
+
+    expect(find.byKey(Key('userQuestion')).evaluate().single.widget.toString().contains('-3.141592653589793'), isTrue);
     expect(find.byKey(Key('userAnswer')).evaluate().single.widget.toString().contains('3.141592653589793'), isTrue);
 
     await tester.tap(find.text('C'));
